@@ -1,0 +1,9 @@
+[
+    { "id": "a", "src": "/image-1.png" },
+    { "id": "b", "src": "/image-2.png" },
+    { "id": "c", "src": "/image-3.png" },
+    { "id": "d", "src": "/image-4.png" },
+    { "id": "e", "src": "/image-5.png" },
+    { "id": "f", "src": "/image-6.png" },
+    { "id": "g", "src": "/image-7.png" }
+]
