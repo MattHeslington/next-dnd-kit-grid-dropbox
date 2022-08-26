@@ -3,13 +3,11 @@ import { DndContext, closestCenter, MouseSensor, TouchSensor, DragOverlay, useSe
 import { arrayMove, SortableContext, rectSortingStrategy } from '@dnd-kit/sortable'
 import { nanoid } from 'nanoid'
 
-import { Grid } from 'components/Grid'
 import { SortablePhoto } from 'components/SortablePhoto'
 
 import Layout from 'layouts/default-layout'
 
 import Dropzone from 'components/dropzone'
-import photos from 'libs/photos'
 
 const UploadGallery = () => {
     const [items, setItems] = useState([])
@@ -22,7 +20,7 @@ const UploadGallery = () => {
             const reader = new FileReader()
             reader.onload = function (e) {
                 setItems((prevState) => [...prevState, { id: nanoid(), file: file, src: e.target.result }])
-                setPreviewImages((prevState) => [...prevState, e.target.result])
+                setPreviewImages((prevState) => [...prevState, file.path])
             }
             reader.readAsDataURL(file)
             return file
@@ -34,14 +32,6 @@ const UploadGallery = () => {
         'image/jpg': ['.jpg', '.jpeg'],
         'image/webp': ['.webp'],
     }
-
-    useEffect(() => {
-        console.log('items: ', items)
-    }, [items])
-
-    useEffect(() => {
-        console.log('previewImages: ', previewImages)
-    }, [previewImages])
 
     return (
         <>
@@ -73,17 +63,13 @@ const UploadGallery = () => {
         const { active, over } = event
 
         if (active.id !== over.id) {
+            console.log('activeId: ', active.id)
+            console.log('overId: ', over.id)
             setPreviewImages((previewImages) => {
                 const oldIndex = previewImages.indexOf(active.id)
                 const newIndex = previewImages.indexOf(over.id)
-
+                console.log('oldIndex: ', oldIndex, ' newIndex: ', newIndex)
                 return arrayMove(previewImages, oldIndex, newIndex)
-            })
-            setItems((items) => {
-                const oldIndex = items.indexOf(active.id)
-                const newIndex = items.indexOf(over.id)
-
-                return arrayMove(items, oldIndex, newIndex)
             })
         }
 

@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 
-const Photo = forwardRef(({ url, index, faded, style, ...props }, ref) => {
+export const Photo = forwardRef(({ url, index, faded, style, ...props }, ref) => {
     const inlineStyles = {
         opacity: faded ? '0.2' : '1',
         transformOrigin: '0 0',
@@ -18,5 +18,3 @@ const Photo = forwardRef(({ url, index, faded, style, ...props }, ref) => {
 })
 
 Photo.displayName = 'Photo'
-
-export default Photo
